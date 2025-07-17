@@ -21,3 +21,7 @@ dependencyResolutionManagement {
 
 rootProject.name = "DogsApp"
 include(":app")
+include(":app:core:di")
+include(":app:core:network")
+include(":app:core:utils")
+include(":app:core:theme")
