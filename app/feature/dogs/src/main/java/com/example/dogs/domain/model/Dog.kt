@@ -1,4 +1,8 @@
 package com.example.dogs.domain.model
 
-class Dog {
-}
+data class Dog(
+    val dogName: String,
+    val description: String,
+    val age: Int,
+    val url: String
+)

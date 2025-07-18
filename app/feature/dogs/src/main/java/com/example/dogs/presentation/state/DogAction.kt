@@ -1,4 +1,7 @@
 package com.example.dogs.presentation.state
 
-class DogAction {
+sealed class DogAction {
+    object LoadDogs : DogAction()
+    object RefreshDogs : DogAction()
+    object ClearError : DogAction()
 }
