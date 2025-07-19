@@ -5,7 +5,7 @@ import com.example.network.data.remote.DogDto
 import com.example.dogs.domain.model.Dog
 
 object DogMapper {
-    fun dtoToDomain(dto: com.example.network.data.remote.DogDto): Dog {
+    fun dtoToDomain(dto: DogDto): Dog {
         return Dog(
             dogName = dto.dogName,
             description = dto.description,

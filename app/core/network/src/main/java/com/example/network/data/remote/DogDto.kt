@@ -9,6 +9,6 @@ data class DogDto(
     val description: String,
     @SerializedName("age")
     val age: Int,
-    @SerializedName("url")
+    @SerializedName("image")
     val url: String
 )

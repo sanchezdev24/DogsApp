@@ -1,4 +1,4 @@
-package com.example.theme
+package com.example.dogsapp
 
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.lightColorScheme
