@@ -1,5 +1,6 @@
 package com.example.dogs.presentation.ui
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -16,6 +17,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.dogs.domain.model.Dog
 import com.example.dogs.presentation.state.DogAction
+import com.example.dogs.presentation.theme.AppColors
 import com.example.dogs.presentation.ui.components.EmptyState
 import com.example.dogs.presentation.ui.components.ErrorMessage
 import com.example.dogs.presentation.ui.components.LoadingIndicator
@@ -35,7 +37,7 @@ fun DogListScreen(
     )
 
     Column(
-        modifier = Modifier.fillMaxSize()
+        modifier = Modifier.fillMaxSize().background(AppColors.Background)
     ) {
         // TopAppBar
         CenterAlignedTopAppBar(

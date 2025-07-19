@@ -24,6 +24,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.example.dogs.domain.model.Dog
+import com.example.dogs.presentation.theme.AppColors
 
 @Composable
 fun DogItem(
@@ -50,7 +51,8 @@ fun DogItem(
                 model = dog.url,
                 contentDescription = "Imagen de ${dog.dogName}",
                 modifier = Modifier
-                    .size(80.dp)
+                    .width(100.dp)
+                    .height(160.dp)
                     .clip(RoundedCornerShape(8.dp)),
                 contentScale = ContentScale.Crop
             )
@@ -65,7 +67,7 @@ fun DogItem(
                     text = dog.dogName,
                     fontSize = 18.sp,
                     fontWeight = FontWeight.Bold,
-                    color = MaterialTheme.colorScheme.onSurface,
+                    color = AppColors.Secondary,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis
                 )
@@ -75,7 +77,7 @@ fun DogItem(
                 Text(
                     text = dog.description,
                     fontSize = 14.sp,
-                    color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f),
+                    color =  AppColors.Primary,
                     maxLines = 2,
                     overflow = TextOverflow.Ellipsis
                 )
@@ -85,7 +87,7 @@ fun DogItem(
                 Text(
                     text = "Almost ${dog.age} years",
                     fontSize = 12.sp,
-                    color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.5f),
+                    color =  AppColors.Secondary,
                     fontWeight = FontWeight.Medium
                 )
             }
