@@ -9,7 +9,5 @@ import javax.inject.Inject
 class GetDogsUseCase @Inject constructor(
     private val repository: DogRepository
 ) {
-    operator fun invoke(): Flow<Resource<List<Dog>>> = repository.getDogs()
-
-    suspend fun refreshDogs() = repository.refreshDogs()
+    operator fun invoke(isFirst: Boolean): Flow<Resource<List<Dog>>> = repository.getDogs(isFirst)
 }

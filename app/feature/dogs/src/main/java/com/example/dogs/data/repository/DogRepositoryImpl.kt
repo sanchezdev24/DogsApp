@@ -1,5 +1,6 @@
 package com.example.dogs.data.repository
 
+import com.example.database.data.local.DogDao
 import com.example.dogs.data.mapper.DogMapper
 import com.example.dogs.domain.model.Dog
 import com.example.dogs.domain.repository.DogRepository
@@ -12,27 +13,26 @@ import javax.inject.Inject
 
 class DogRepositoryImpl @Inject constructor(
     private val apiService: DogApiService,
-    private val dogDao: com.example.database.data.local.DogDao
+    private val dogDao: DogDao
 ) : DogRepository {
 
-    override fun getDogs(): Flow<Resource<List<Dog>>> = flow {
+    override fun getDogs(isFirst: Boolean): Flow<Resource<List<Dog>>> = flow {
         emit(Resource.Loading())
 
         try {
             // Primero intenta obtener datos locales
-            dogDao.getAllDogs().map { entities ->
-                entities.map { DogMapper.entityToDomain(it) }
-            }.collect { localDogs ->
-                if (localDogs.isNotEmpty()) {
-                    emit(Resource.Success(localDogs))
-                } else {
-                    // Si no hay datos locales, obtener de la API
-                    refreshDogs()
-                    dogDao.getAllDogs().map { entities ->
-                        entities.map { DogMapper.entityToDomain(it) }
-                    }.collect { dogs ->
-                        emit(Resource.Success(dogs))
-                    }
+            if (isFirst) {
+                refreshDogs()
+                dogDao.getAllDogs().map { entities ->
+                    entities.map { DogMapper.entityToDomain(it) }
+                }.collect { dogs ->
+                    emit(Resource.Success(dogs))
+                }
+            } else {
+                dogDao.getAllDogs().map { entities ->
+                    entities.map { DogMapper.entityToDomain(it) }
+                }.collect { dogs ->
+                    emit(Resource.Success(dogs))
                 }
             }
         } catch (e: Exception) {

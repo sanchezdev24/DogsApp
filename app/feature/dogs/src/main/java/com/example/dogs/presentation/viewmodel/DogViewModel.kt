@@ -27,15 +27,15 @@ class DogViewModel @Inject constructor(
 
     fun handleAction(action: DogAction) {
         when (action) {
-            is DogAction.LoadDogs -> loadDogs()
-            is DogAction.RefreshDogs -> refreshDogs()
+            is DogAction.LoadDogs -> loadDogs(true)
+            is DogAction.RefreshDogs -> loadDogs(false)
             is DogAction.ClearError -> clearError()
         }
     }
 
-    private fun loadDogs() {
+    private fun loadDogs(isFirst: Boolean) {
         viewModelScope.launch {
-            getDogsUseCase().collect { resource ->
+            getDogsUseCase(isFirst).collect { resource ->
                 when (resource) {
                     is Resource.Loading -> {
                         _uiState.value = _uiState.value.copy(isLoading = true)
@@ -54,21 +54,6 @@ class DogViewModel @Inject constructor(
                         )
                     }
                 }
-            }
-        }
-    }
-
-    private fun refreshDogs() {
-        viewModelScope.launch {
-            try {
-                _uiState.value = _uiState.value.copy(isRefreshing = true)
-                getDogsUseCase.refreshDogs()
-                _uiState.value = _uiState.value.copy(isRefreshing = false)
-            } catch (e: Exception) {
-                _uiState.value = _uiState.value.copy(
-                    isRefreshing = false,
-                    error = e.message
-                )
             }
         }
     }

@@ -5,6 +5,6 @@ import com.example.utils.Resource
 import kotlinx.coroutines.flow.Flow
 
 interface DogRepository {
-    fun getDogs(): Flow<Resource<List<Dog>>>
+    fun getDogs(isFirst: Boolean = false): Flow<Resource<List<Dog>>>
     suspend fun refreshDogs()
 }
